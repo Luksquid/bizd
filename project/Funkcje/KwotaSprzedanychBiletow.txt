@@ -1,0 +1,67 @@
+create or replace FUNCTION KWOTA_SPRZEDANYCH_BILETOW    
+(
+    p_okres VARCHAR2 -- Parametr wejściowy ('KWARTAL', 'POLROCZE' lub 'ROK')
+)
+RETURN SYS_REFCURSOR
+IS
+    wynik SYS_REFCURSOR; -- Definicja kursora
+BEGIN
+    IF p_okres = 'KWARTAL' THEN
+        OPEN wynik FOR
+            SELECT 
+                EXTRACT(YEAR FROM S.POCZATEK) AS ROK,
+                CASE 
+                    WHEN EXTRACT(MONTH FROM S.POCZATEK) BETWEEN 1 AND 3 THEN 1
+                    WHEN EXTRACT(MONTH FROM S.POCZATEK) BETWEEN 4 AND 6 THEN 2
+                    WHEN EXTRACT(MONTH FROM S.POCZATEK) BETWEEN 7 AND 9 THEN 3
+                    ELSE 4
+                END AS KWARTAL,
+                SUM(S.CENA) AS KWOTA
+            FROM SEANS S
+            INNER JOIN BILET B
+              ON S.ID = B.ID_SEANSU
+            GROUP BY EXTRACT(YEAR FROM S.POCZATEK),
+                     CASE 
+                         WHEN EXTRACT(MONTH FROM S.POCZATEK) BETWEEN 1 AND 3 THEN 1
+                         WHEN EXTRACT(MONTH FROM S.POCZATEK) BETWEEN 4 AND 6 THEN 2
+                         WHEN EXTRACT(MONTH FROM S.POCZATEK) BETWEEN 7 AND 9 THEN 3
+                         ELSE 4
+                     END
+            ORDER BY ROK, KWARTAL;
+
+    ELSIF p_okres = 'POLROCZE' THEN
+        OPEN wynik FOR
+            SELECT 
+                EXTRACT(YEAR FROM S.POCZATEK) AS ROK,
+                CASE 
+                    WHEN EXTRACT(MONTH FROM S.POCZATEK) BETWEEN 1 AND 6 THEN 'I półrocze'
+                    ELSE 'II półrocze'
+                END AS POLROCZE,
+                SUM(S.CENA) AS KWOTA
+            FROM SEANS S
+            INNER JOIN BILET B
+              ON S.ID = B.ID_SEANSU
+            GROUP BY EXTRACT(YEAR FROM S.POCZATEK),
+                     CASE 
+                         WHEN EXTRACT(MONTH FROM S.POCZATEK) BETWEEN 1 AND 6 THEN 'I półrocze'
+                         ELSE 'II półrocze'
+                     END
+            ORDER BY ROK, POLROCZE;
+
+    ELSIF p_okres = 'ROK' THEN
+        OPEN wynik FOR
+            SELECT 
+                EXTRACT(YEAR FROM S.POCZATEK) AS ROK,
+                SUM(S.CENA) AS KWOTA
+            FROM SEANS S
+            INNER JOIN BILET B
+              ON S.ID = B.ID_SEANSU
+            GROUP BY EXTRACT(YEAR FROM S.POCZATEK)
+            ORDER BY ROK;
+
+    ELSE
+        RAISE_APPLICATION_ERROR(-20001, 'Niepoprawny parametr. Wybierz "KWARTAL", "POLROCZE" lub "ROK".');
+    END IF;
+
+    RETURN wynik; -- Zwrot kursora
+END;

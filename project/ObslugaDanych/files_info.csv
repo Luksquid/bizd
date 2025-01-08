@@ -1,0 +1,9 @@
+tables,files,archives
+SALA,./data/SALA.csv,./data/archives/SALA.csv
+PRODUKT,./data/PRODUKT.csv,./data/archives/PRODUKT.csv
+KLIENT,./data/KLIENT.csv,./data/archives/KLIENT.csv
+KLIENT_PRODUKT,./data/KLIENT_PRODUKT.csv,./data/archives/KLIENT_PRODUKT.csv
+SEANS,./data/SEANS.csv,./data/archives/SEANS.csv
+BILET,./data/BILET.csv,./data/archives/BILET.csv
+PRACOWNIK,./data/PRACOWNIK.csv,./data/archives/PRACOWNIK.csv
+STANOWISKO,./data/STANOWISKO.csv,./data/archives/STANOWISKO.csv

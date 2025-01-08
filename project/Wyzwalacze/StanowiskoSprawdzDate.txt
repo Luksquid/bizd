@@ -1,0 +1,12 @@
+create or replace TRIGGER STANOWISKO_SPRAWDZ_DATE
+BEFORE INSERT OR UPDATE ON STANOWISKO
+FOR EACH ROW
+BEGIN
+    IF :NEW.POCZATEK < SYSTIMESTAMP THEN
+        RAISE_APPLICATION_ERROR(-20002, 'Data rozpoczęcia pracy nie może być wcześniejsza niż bieżący czas.');
+    ELSIF :NEW.KONIEC < SYSTIMESTAMP THEN
+        RAISE_APPLICATION_ERROR(-20003, 'Data zakończenia pracy nie może być wcześniejsza niż bieżący czas.');
+    ELSIF :NEW.KONIEC < :NEW.POCZATEK THEN
+        RAISE_APPLICATION_ERROR(-20004, 'Data rozpoczęcia pracy nie może być wcześniejsza niż data zakończenia.');
+    END IF;
+END;

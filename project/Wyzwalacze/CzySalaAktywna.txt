@@ -1,0 +1,16 @@
+CREATE OR REPLACE TRIGGER CZY_SALA_AKTYWNA
+BEFORE INSERT ON SEANS
+FOR EACH ROW
+DECLARE
+    status NUMBER(1,0);
+BEGIN
+    SELECT AKTYWNA
+    INTO status
+    FROM SALA
+    WHERE ID = NEW.ID_SALI;
+
+    IF status = 0 THEN
+        RAISE_APPLICATION_ERROR(-20001, 'Nie można przypisać seansu do nieakywnej sali');
+    END IF;
+END;
+

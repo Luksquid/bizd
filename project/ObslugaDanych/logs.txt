@@ -1,0 +1,120 @@
+2024-12-14 14:55:54
+Plik: ./data/SALA.csv 
+Poprawnie przesłano dane
+
+2024-12-14 14:56:35
+Plik: ./data/SALA.csv 
+Poprawnie przesłano dane
+
+2024-12-14 14:57:27
+Plik: ./data/SALA.csv 
+Błąd: <class 'Exception'>
+Szczegóły błędu:
+oracledb.exceptions.IntegrityError: ORA-01438: wartość większa niż określona precyzja dozwolona dla tej kolumny
+Help: https://docs.oracle.com/error-help/db/ora-01438/
+
+2024-12-15 11:42:07
+Plik: ./data/SEANS.csv 
+Błąd: <class 'Exception'>
+Szczegóły błędu:
+oracledb.exceptions.DatabaseError: DPY-4004: invalid number
+
+2024-12-15 11:43:27
+Plik: ./data/SEANS.csv 
+Błąd: <class 'Exception'>
+Szczegóły błędu:
+oracledb.exceptions.DatabaseError: ORA-20001: Nie można przypisać wynagrodzenia do nieakywnej sali
+ORA-06512: przy "KALAMARSKIL.CZY_SALA_AKTYWNA", linia 10
+ORA-04088: błąd w trakcie wykonywania wyzwalacza 'KALAMARSKIL.CZY_SALA_AKTYWNA'
+
+2024-12-15 11:45:02
+Plik: ./data/SEANS.csv 
+Błąd: <class 'Exception'>
+Szczegóły błędu:
+oracledb.exceptions.DatabaseError: ORA-20001: Nie można przypisać seansu do nieakywnej sali
+ORA-06512: przy "KALAMARSKIL.CZY_SALA_AKTYWNA", linia 10
+ORA-04088: błąd w trakcie wykonywania wyzwalacza 'KALAMARSKIL.CZY_SALA_AKTYWNA'
+
+2024-12-15 12:52:49
+Plik: ./data/SEANS.csv 
+Błąd: <class 'Exception'>
+Szczegóły błędu:
+oracledb.exceptions.DatabaseError: ORA-20001: Nie można przypisać seansu do nieakywnej sali
+ORA-06512: przy "KALAMARSKIL.CZY_SALA_AKTYWNA", linia 10
+ORA-04088: błąd w trakcie wykonywania wyzwalacza 'KALAMARSKIL.CZY_SALA_AKTYWNA'
+
+2024-12-15 12:53:11
+Plik: ./data/SEANS.csv 
+Poprawnie przesłano dane
+
+2024-12-15 13:00:18
+Plik: ./data/KLIENT.csv 
+Poprawnie przesłano dane
+
+2024-12-15 13:30:26
+Plik: ./data/BILET.csv 
+Poprawnie przesłano dane
+
+2024-12-21 10:39:39
+Plik: ./data/SEANS.csv 
+Błąd: <class 'Exception'>
+Szczegóły błędu:
+oracledb.exceptions.DatabaseError: ORA-20001: Nie można przypisać seansu do nieakywnej sali
+ORA-06512: przy "KALAMARSKIL.CZY_SALA_AKTYWNA", linia 10
+ORA-04088: błąd w trakcie wykonywania wyzwalacza 'KALAMARSKIL.CZY_SALA_AKTYWNA'
+
+2024-12-21 10:41:51
+Plik: ./data/SEANS.csv 
+Poprawnie przesłano dane
+
+2024-12-21 10:48:05
+Plik: ./data/BILET.csv 
+Błąd: <class 'Exception'>
+Szczegóły błędu:
+oracledb.exceptions.DatabaseError: ORA-20007: Nie można sprzedać zajetego miejsca
+ORA-06512: przy "KALAMARSKIL.CZY_MIEJSCE_SPRZEDANE", linia 12
+ORA-04088: błąd w trakcie wykonywania wyzwalacza 'KALAMARSKIL.CZY_MIEJSCE_SPRZEDANE'
+
+2024-12-21 10:48:22
+Plik: ./data/BILET.csv 
+Błąd: <class 'Exception'>
+Szczegóły błędu:
+oracledb.exceptions.DatabaseError: ORA-20007: Nie można sprzedać zajetego miejsca
+ORA-06512: przy "KALAMARSKIL.CZY_MIEJSCE_SPRZEDANE", linia 12
+ORA-04088: błąd w trakcie wykonywania wyzwalacza 'KALAMARSKIL.CZY_MIEJSCE_SPRZEDANE'
+
+2024-12-21 10:53:58
+Plik: ./data/BILET.csv 
+Błąd: <class 'Exception'>
+Szczegóły błędu:
+oracledb.exceptions.DatabaseError: ORA-20007: Nie można sprzedać zajetego miejsca
+ORA-06512: przy "KALAMARSKIL.CZY_MIEJSCE_SPRZEDANE", linia 12
+ORA-04088: błąd w trakcie wykonywania wyzwalacza 'KALAMARSKIL.CZY_MIEJSCE_SPRZEDANE'
+
+2024-12-21 10:58:28
+Plik: ./data/BILET.csv 
+Błąd: <class 'Exception'>
+Szczegóły błędu:
+oracledb.exceptions.DatabaseError: ORA-20007: Nie można sprzedać zajetego miejsca
+ORA-06512: przy "KALAMARSKIL.CZY_MIEJSCE_SPRZEDANE", linia 12
+ORA-04088: błąd w trakcie wykonywania wyzwalacza 'KALAMARSKIL.CZY_MIEJSCE_SPRZEDANE'
+
+2024-12-21 11:01:43
+Plik: ./data/BILET.csv 
+Błąd: <class 'Exception'>
+Szczegóły błędu:
+oracledb.exceptions.DatabaseError: ORA-20007: Nie można sprzedać zajetego miejsca
+ORA-06512: przy "KALAMARSKIL.CZY_MIEJSCE_SPRZEDANE", linia 12
+ORA-04088: błąd w trakcie wykonywania wyzwalacza 'KALAMARSKIL.CZY_MIEJSCE_SPRZEDANE'
+
+2024-12-21 11:03:39
+Plik: ./data/BILET.csv 
+Błąd: <class 'Exception'>
+Szczegóły błędu:
+oracledb.exceptions.DatabaseError: ORA-01722: niepoprawna liczba
+Help: https://docs.oracle.com/error-help/db/ora-01722/
+
+2024-12-21 11:04:20
+Plik: ./data/BILET.csv 
+Poprawnie przesłano dane
+

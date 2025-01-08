@@ -1,0 +1,15 @@
+CREATE OR REPLACE FUNCTION PODNIES_CENY (
+    PODWYZKA IN NUMBER
+) RETURN VARCHAR2
+IS
+BEGIN
+    IF PODWYZKA < 0 THEN
+        RAISE_APPLICATION_ERROR(-20013, 'Kwota podwyżki nie może być mniejsza niż 0');
+    END IF;
+
+    UPDATE PRODUKT
+    SET CENA = CENA + (CENA * PODWYZKA / 100);
+
+    RETURN 'Podniesiono ceny o ' || PODWYZKA || '%';
+END;
+/

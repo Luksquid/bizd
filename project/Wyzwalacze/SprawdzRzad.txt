@@ -1,0 +1,10 @@
+create or replace TRIGGER SPRAWDZ_RZAD
+BEFORE INSERT OR UPDATE ON BILET
+FOR EACH ROW
+BEGIN
+    IF :NEW.RZAD < 1 OR :NEW.RZAD > 10 THEN
+        RAISE_APPLICATION_ERROR(-20005, 'Należy podać numer miejsca z zakreu 1 - 10');
+    ELSIF :NEW.MIEJSCE < 1 OR :NEW.MIEJSCE > 15 THEN
+        RAISE_APPLICATION_ERROR(-20007, 'Należy podać numer miejsca z zakreu 1 - 15');
+    END IF;
+END;

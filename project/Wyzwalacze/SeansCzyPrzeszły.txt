@@ -1,0 +1,18 @@
+create or replace TRIGGER SEANS_CZY_PRZESZLY
+BEFORE UPDATE ON BILET
+FOR EACH ROW
+DECLARE
+    status NUMBER(1); 
+BEGIN
+    SELECT CASE 
+               WHEN KONIEC < SYSTIMESTAMP THEN 1
+               ELSE 0  
+           END
+    INTO status
+    FROM SEANS
+    WHERE ID = :NEW.ID_SEANSU;
+
+    IF status = 1 THEN
+        RAISE_APPLICATION_ERROR(-20011, 'Nie można sprzedać biletu na przeszły seans');
+    END IF;
+END;

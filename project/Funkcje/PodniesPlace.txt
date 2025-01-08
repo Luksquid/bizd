@@ -1,0 +1,17 @@
+create or replace FUNCTION PODNIES_PLACE (
+    PODWYZKA IN NUMBER
+) RETURN NUMBER
+IS
+    liczba_zmienionych NUMBER;
+BEGIN
+    IF PODWYZKA < 0 THEN
+        RAISE_APPLICATION_ERROR(-20013, 'Kwota podwyżki nie może być mniejsza niż 0');
+    END IF;
+
+    UPDATE PRACOWNIK
+    SET PLACA = PLACA + PODWYZKA;
+
+    liczba_zmienionych := SQL%ROWCOUNT;
+
+    RETURN liczba_zmienionych * PODWYZKA;
+END;

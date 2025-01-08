@@ -1,0 +1,66 @@
+create or replace FUNCTION dni_obciazenia_sal
+(
+    p_okres VARCHAR2 -- Parametr wejściowy ('KWARTAL', 'POLROCZE', 'ROK')
+)
+RETURN SYS_REFCURSOR
+IS
+    wynik SYS_REFCURSOR; -- Definicja kursora
+BEGIN
+    IF p_okres = 'KWARTAL' THEN
+        OPEN wynik FOR
+            SELECT 
+                EXTRACT(YEAR FROM S.POCZATEK) AS ROK,
+                CASE 
+                    WHEN EXTRACT(MONTH FROM S.POCZATEK) BETWEEN 1 AND 3 THEN 1
+                    WHEN EXTRACT(MONTH FROM S.POCZATEK) BETWEEN 4 AND 6 THEN 2
+                    WHEN EXTRACT(MONTH FROM S.POCZATEK) BETWEEN 7 AND 9 THEN 3
+                    ELSE 4
+                END AS KWARTAL,
+                S.ID_SALI,
+                COUNT(DISTINCT TRUNC(S.POCZATEK)) AS LICZBA_DNI
+            FROM SEANS S
+            GROUP BY EXTRACT(YEAR FROM S.POCZATEK),
+                     CASE 
+                         WHEN EXTRACT(MONTH FROM S.POCZATEK) BETWEEN 1 AND 3 THEN 1
+                         WHEN EXTRACT(MONTH FROM S.POCZATEK) BETWEEN 4 AND 6 THEN 2
+                         WHEN EXTRACT(MONTH FROM S.POCZATEK) BETWEEN 7 AND 9 THEN 3
+                         ELSE 4
+                     END,
+                     S.ID_SALI
+            ORDER BY ROK, KWARTAL, S.ID_SALI;
+
+    ELSIF p_okres = 'POLROCZE' THEN
+        OPEN wynik FOR
+            SELECT 
+                EXTRACT(YEAR FROM S.POCZATEK) AS ROK,
+                CASE 
+                    WHEN EXTRACT(MONTH FROM S.POCZATEK) BETWEEN 1 AND 6 THEN 'I półrocze'
+                    ELSE 'II półrocze'
+                END AS POLROCZE,
+                S.ID_SALI,
+                COUNT(DISTINCT TRUNC(S.POCZATEK)) AS LICZBA_DNI
+            FROM SEANS S
+            GROUP BY EXTRACT(YEAR FROM S.POCZATEK),
+                     CASE 
+                         WHEN EXTRACT(MONTH FROM S.POCZATEK) BETWEEN 1 AND 6 THEN 'I półrocze'
+                         ELSE 'II półrocze'
+                     END,
+                     S.ID_SALI
+            ORDER BY ROK, POLROCZE, S.ID_SALI;
+
+    ELSIF p_okres = 'ROK' THEN
+        OPEN wynik FOR
+            SELECT 
+                EXTRACT(YEAR FROM S.POCZATEK) AS ROK,
+                S.ID_SALI,
+                COUNT(DISTINCT TRUNC(S.POCZATEK)) AS LICZBA_DNI
+            FROM SEANS S
+            GROUP BY EXTRACT(YEAR FROM S.POCZATEK), S.ID_SALI
+            ORDER BY ROK, S.ID_SALI;
+
+    ELSE
+        RAISE_APPLICATION_ERROR(-20001, 'Niepoprawny parametr. Wybierz "KWARTAL", "POLROCZE" lub "ROK".');
+    END IF;
+
+    RETURN wynik; -- Zwrot kursora
+END;
